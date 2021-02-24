@@ -25,7 +25,29 @@ describe('Lotto test', () => {
     testInputValue(button);
   });
 
-  it('구입 금액 입력 뒤 버튼을 클릭했을 때, 알맞은 개수의 로또를 렌더링한다.', () => {
+  it('구입 금액 입력 뒤 버튼을 클릭했을 때, 수동 구매 창을 렌더링한다.', () => {
+    cy.get('manual-purchasing-form') //
+      .should('be.visible');
+  });
+
+  it('수동 구매를 했을 때, 알맞은 개수의 로또를 렌더링 한다.', () => {
+    for (let i = 0; i < 3; i++) {
+      testLottoNumbers(['1', '2', '3', '4', '5', '45']);
+    }
+    cy.get('#lotto-container') //
+      .find('.lotto-wrapper')
+      .should('have.length', 3);
+  });
+
+  function testLottoNumbers(numbers, alertMessage = '') {
+    numbers.forEach((number, idx) => {
+      typeInputValue(`[data-lotto-number=${idx}]`, number);
+    });
+    testInputValue('#manual-purchasing-submit', alertMessage);
+  }
+
+  it('잔액으로 자동 구매를 했을 때, 알맞게 누적된 로또를 렌더링한다.', () => {
+    cy.get('#auto-purchasing-submit').click();
     cy.get('#lotto-container') //
       .find('.lotto-wrapper')
       .should('have.length', 5);
