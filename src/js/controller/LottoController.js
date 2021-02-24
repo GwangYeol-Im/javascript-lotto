@@ -21,7 +21,7 @@ export class LottoController {
     this.$lottoToggle.setEvent('click', this.handleLottoToggle.bind(this));
     this.$resultForm.setEvent('submit', this.handleResult.bind(this));
     this.$winningNumberInputs.setEvent('input', this.limitInputLength.bind(this));
-    this.$modalClose.setEvent('click', () => this.$('#modal').removeClass('open'));
+    this.$modalClose.setEvent('click', () => this.$modal.removeClass('open'));
     this.$resetButton.setEvent('click', this.reset.bind(this));
   }
 

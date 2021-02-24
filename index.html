@@ -20,9 +20,28 @@
                 class="w-100 mr-2 pl-2"
                 placeholder="구입 금액 (1000원 단위)"
                 id="purchase-amount-input"
+                autofocus
               />
               <button type="submit" class="btn btn-cyan" id="purchase-amount-submit">확인</button>
             </div>
+          </form>
+          <!-- manual purchasing form -->
+          <form class="mt-5 d-none" id="manual-purchasing-form" novalidate>
+            <label class="mb-2 d-inline-block">원하는 로또 번호를 입력해주세요. (1 - 45)</label>
+            <div class="d-flex justify-between items-center">
+              <div>
+                <input type="number" class="lotto-number mx-1 text-center" />
+                <input type="number" class="lotto-number mx-1 text-center" />
+                <input type="number" class="lotto-number mx-1 text-center" />
+                <input type="number" class="lotto-number mx-1 text-center" />
+                <input type="number" class="lotto-number mx-1 text-center" />
+                <input type="number" class="lotto-number mx-1 text-center" />
+              </div>
+              <button type="submit" class="btn btn-cyan" id="manual-purchasing-submit">확인</button>
+            </div>
+            <button type="submit" class="btn btn-cyan mt-4 w-100" id="auto-purchasing-submit">
+              남은 금액은 자동 구매할래요. (잔액: <span id="remains"></span> 원)
+            </button>
           </form>
           <!-- lotto section -->
           <section class="mt-9 d-none" id="lotto-section">
@@ -42,8 +61,7 @@
           <!-- lotto-result-form -->
           <form class="mt-9 d-none" id="lotto-result-form" novalidate>
             <label class="flex-auto d-inline-block mb-3"
-              >지난 주 당첨번호 6개와 보너스 넘버 1개를 입력해주세요. (1부터 45까지의 숫자를
-              입력해주세요.)</label
+              >지난 주 당첨번호 6개와 보너스 넘버 1개를 입력해주세요.</label
             >
             <div class="d-flex">
               <div>
