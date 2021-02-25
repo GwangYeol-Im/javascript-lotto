@@ -5,12 +5,18 @@ import { $ } from '../util/index.js';
 export class LottoView {
   $lottoSection = $('#lotto-section');
   $lottoResultForm = $('#lotto-result-form');
+  $remains = $('#remains');
 
-  renderLottoSection(lottos) {
+  renderPurchasingSection(money) {
+    $('#purchasing-section').show();
+    this.$remains.innerText(`${money}`);
+  }
+
+  renderLottoSection(lottos, remains) {
     $('#lotto-count').innerText(`${lottos.length}`);
     $('#lotto-container').innerHTML(lottoTemplate(lottos));
+    this.$remains.innerText(`${remains}`);
     this.$lottoSection.show();
-    this.$lottoResultForm.show();
 
     function lottoTemplate(lottos) {
       return lottos.reduce((html, lotto, idx) => {
@@ -24,6 +30,10 @@ export class LottoView {
         `);
       }, '');
     }
+  }
+
+  renderResultForm() {
+    this.$lottoResultForm.show();
   }
 
   renderWinningResult({ rankCounts, earningRate }) {

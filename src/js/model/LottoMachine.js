@@ -12,23 +12,45 @@ import { Lotto } from './Lotto.js';
 export class LottoMachine {
   #lottos = [];
   #insertedMoney = 0;
+  #remains = 0;
 
   get lottos() {
     return [...this.#lottos];
   }
 
+  get remains() {
+    return this.#remains;
+  }
+
   insert(money) {
     this.#insertedMoney = money;
+    this.#remains = money;
+  }
+
+  publishLottoByManual(numbers) {
+    if (!this.#remains) {
+      return false;
+    }
+    this.#lottos.push(new Lotto(numbers));
+    this.#remains -= UNIT_AMOUNT;
+
+    return true;
   }
 
   publishLottosByAuto() {
-    const count = this.#insertedMoney / UNIT_AMOUNT;
+    if (!this.#remains) {
+      return false;
+    }
+    const count = this.#remains / UNIT_AMOUNT;
 
     for (let i = 0; i < count; i++) {
       const numbers = this.getRandomLottoNumbers();
 
       this.#lottos.push(new Lotto(numbers));
     }
+    this.#remains = 0;
+
+    return true;
   }
 
   getRandomLottoNumbers() {

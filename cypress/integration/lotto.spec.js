@@ -26,7 +26,7 @@ describe('Lotto test', () => {
   });
 
   it('구입 금액 입력 뒤 버튼을 클릭했을 때, 수동 구매 창을 렌더링한다.', () => {
-    cy.get('manual-purchasing-form') //
+    cy.get('#manual-purchasing-form') //
       .should('be.visible');
   });
 
@@ -47,7 +47,7 @@ describe('Lotto test', () => {
   }
 
   it('잔액으로 자동 구매를 했을 때, 알맞게 누적된 로또를 렌더링한다.', () => {
-    cy.get('#auto-purchasing-submit').click();
+    cy.get('#auto-purchasing-button').click();
     cy.get('#lotto-container') //
       .find('.lotto-wrapper')
       .should('have.length', 5);
@@ -96,6 +96,7 @@ describe('Lotto test', () => {
     cy.get('#reset-button').click();
     typeInputValue('#purchase-amount-input', '5000');
     testInputValue('#purchase-amount-submit');
+    cy.get('#auto-purchasing-button').click();
     testWinnigNumbers(['1', '2', '3', '4', '5', '6', '45']);
     cy.get('#modal').should('be.visible');
   });

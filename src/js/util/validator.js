@@ -4,7 +4,6 @@ import {
   MSG_OVERLAPPED_LOTTO_NUMBERS,
 } from '../constants/alertMessage.js';
 import {
-  WINNING_NUMBER_COUNT,
   MAX_LOTTO_NUMBER,
   MIN_LOTTO_NUMBER,
   MSG_INVALID_PURCHASE_AMOUNT,
@@ -23,8 +22,8 @@ export const validator = {
 
     return '';
   },
-  lottoNumbers: numbers => {
-    if (numbers.length < WINNING_NUMBER_COUNT) {
+  lottoNumbers: (numbers, count) => {
+    if (numbers.length < count) {
       return MSG_BLANK_INPUT;
     }
     if (!isRangeOf(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, numbers)) {
